@@ -9,12 +9,14 @@ botaoAdicionar.addEventListener("click", function(event){
     var paciente = pegarValoresFormulario(form);
 
     var pacienteTr = montarNovaTr(paciente);    
-
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
     
+    var tabela = document.querySelector("#tabela-pacientes");
+
+    tabela.appendChild(pacienteTr);
+    validaPaciente(tabela);
     form.reset();
 })
+
  
 function pegarValoresFormulario(form){
     
@@ -31,7 +33,16 @@ function pegarValoresFormulario(form){
 
 };
 
-function montarNovaTr (paciente){
+function montaTd(dado, classe){
+    
+    var td = document.createElement("td");
+    td.textContent = dado;
+    td.classList.add(classe);
+
+    return td;
+}
+
+function montarNovaTr(paciente){
 
     var pacienteTr = document.createElement("tr");
     pacienteTr.classList.add("paciente");
@@ -47,11 +58,37 @@ function montarNovaTr (paciente){
 
 };
 
-function montaTd(dado, classe){
+function validaPaciente(tabela){
     
-    var td = document.createElement("td");
-    td.textContent = dado;
-    td.classList.add(classe);
+    //var pacientes = document.querySelectorAll(".paciente");
 
-    return td;
+    for( var i = 0; i < pacienteTr.length; i++){
+    
+    var paciente = pacienteTr[i];
+
+    var peso = paciente.querySelector(".info-peso").textContent;
+    var altura = paciente.querySelector(".info-altura").textContent; 
+
+    var pesoValido = true;
+    var alturaValida = true;
+
+    if (peso >= 500 || peso <= 0){
+        pesoValido = false;
+        imc.textContent = "Peso Inválido";
+        paciente.classList.add("pacienteInvalido");
+        
+    }
+    if (altura >= 3.00 || altura <= 0){
+        alturaValida = false;
+        imc.textContent = "Altura Inválida";
+        paciente.classList.add("pacienteInvalido");
+    }
+    if(!pesoValido && !alturaValida){
+        imc.textContent = "Altura e peso inválidos";        
+    }
+
+    if (alturaValida && pesoValido){
+        imc.textContent = calculaImc(peso, altura);
+    } 
 }
+
