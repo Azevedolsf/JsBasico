@@ -10,10 +10,22 @@ botaoAdicionar.addEventListener("click", function(event){
 
     var pacienteTr = montarNovaTr(paciente);    
     
+    if(!validaPaciente(paciente)){
+        msgErro = document.querySelector('.msgErro');
+        msgErro.textContent = "Paciente Inválido";
+        msgErro.classList.add('pacienteInvalido');
+        console.log(msgErro);
+        return;
+    }else{
+        msgErro = document.querySelector('.msgErro');
+        msgErro.textContent = "Paciente Cadastrado";
+        msgErro.classList.add('pacienteValido');
+        console.log(msgErro);
+    }
     var tabela = document.querySelector("#tabela-pacientes");
 
     tabela.appendChild(pacienteTr);
-    validaPaciente(tabela);
+
     form.reset();
 })
 
@@ -57,38 +69,10 @@ function montarNovaTr(paciente){
     return pacienteTr;
 
 };
-
-function validaPaciente(tabela){
-    
-    //var pacientes = document.querySelectorAll(".paciente");
-
-    for( var i = 0; i < pacienteTr.length; i++){
-    
-    var paciente = pacienteTr[i];
-
-    var peso = paciente.querySelector(".info-peso").textContent;
-    var altura = paciente.querySelector(".info-altura").textContent; 
-
-    var pesoValido = true;
-    var alturaValida = true;
-
-    if (peso >= 500 || peso <= 0){
-        pesoValido = false;
-        imc.textContent = "Peso Inválido";
-        paciente.classList.add("pacienteInvalido");
-        
+function validaPaciente(paciente){
+    if(validaPeso(paciente.peso)){
+        return true;
+    }else{
+        return false;
     }
-    if (altura >= 3.00 || altura <= 0){
-        alturaValida = false;
-        imc.textContent = "Altura Inválida";
-        paciente.classList.add("pacienteInvalido");
-    }
-    if(!pesoValido && !alturaValida){
-        imc.textContent = "Altura e peso inválidos";        
-    }
-
-    if (alturaValida && pesoValido){
-        imc.textContent = calculaImc(peso, altura);
-    } 
 }
-

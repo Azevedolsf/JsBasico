@@ -17,16 +17,16 @@ titulo.textContent = "Miau miau";
     var tdImc = paciente.querySelector(".info-imc");
     var imc = tdImc;
 
-    var pesoValido = true;
-    var alturaValida = true;
+    var pesoValido = validaPeso(peso);
+    var alturaValida = validaAltura(altura);
 
-    if (peso >= 500 || peso <= 0){
+    if (!validaPeso){
         pesoValido = false;
         imc.textContent = "Peso Inválido";
         paciente.classList.add("pacienteInvalido");
         
     }
-    if (altura >= 3.00 || altura <= 0){
+    if (!validaAltura){
         alturaValida = false;
         imc.textContent = "Altura Inválida";
         paciente.classList.add("pacienteInvalido");
@@ -38,6 +38,21 @@ titulo.textContent = "Miau miau";
     if (alturaValida && pesoValido){
         imc.textContent = calculaImc(peso, altura);
     } 
+}
+
+function validaPeso(peso){
+    if(peso < 500 && peso > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+function validaAltura(altura){
+    if(peso < 3 && peso > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 function calculaImc(peso, altura){
 
