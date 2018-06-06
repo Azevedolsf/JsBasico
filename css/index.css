@@ -144,19 +144,26 @@ button[disabled=disabled], button:disabled {
 .section-form{
 	margin-top:40px;
 }
+.msgErro{
+	display: block;
+	margin:0 auto;
+	max-width:250px;
+	padding:15px 5px;
+	border-radius:3px;
+	text-align: center;
+}
 .msgErro.pacienteInvalido{
 	font-size:14px;
 	font-family: arial, Helvetica, sans-serif;
 	background-color:rgba(255,0,0,0.5);
 	color:white;
-	padding:5px 15px;
 }
 .msgErro.pacienteValido{
 	font-size:14px;
 	font-family: arial, Helvetica, sans-serif;
 	background-color:rgba(0,255,0,0.5);
 	color:white;
-	padding:5px 15px;
 }
+
 
 
