@@ -1,6 +1,6 @@
 
 var titulo = document.querySelector(".titulo");
-titulo.textContent = "Miau miau";
+titulo.textContent = "Aplicando JavaScript";
 
     var pacientes = document.querySelectorAll(".paciente");
 
@@ -20,19 +20,20 @@ titulo.textContent = "Miau miau";
     var pesoValido = validaPeso(peso);
     var alturaValida = validaAltura(altura);
 
-    if (!validaPeso){
-        pesoValido = false;
+    if (!pesoValido){
         imc.textContent = "Peso Inválido";
         paciente.classList.add("pacienteInvalido");
-        
     }
-    if (!validaAltura){
-        alturaValida = false;
+    if (!alturaValida){
         imc.textContent = "Altura Inválida";
         paciente.classList.add("pacienteInvalido");
     }
     if(!pesoValido && !alturaValida){
-        imc.textContent = "Altura e peso inválidos";        
+         imc.textContent = "Altura e peso inválidos";        
+    }
+
+    if(!pesoValido || !alturaValida){
+        paciente.classList.add("pacienteInvalido");
     }
 
     if (alturaValida && pesoValido){
@@ -41,14 +42,14 @@ titulo.textContent = "Miau miau";
 }
 
 function validaPeso(peso){
-    if(peso < 500 && peso > 0){
+    if(peso <= 500 && peso >= 0){
         return true;
     }else{
         return false;
     }
 }
 function validaAltura(altura){
-    if(peso < 3 && peso > 0){
+    if(altura <= 3 && altura >= 0){
         return true;
     }else{
         return false;

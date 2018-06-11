@@ -10,23 +10,19 @@ botaoAdicionar.addEventListener("click", function(event){
 
     var pacienteTr = montarNovaTr(paciente);    
     
-    if(!validaPaciente(paciente)){
-        msgErro = document.querySelector('.msgErro');
-        msgErro.textContent = "Paciente Inválido";
-        msgErro.classList.add('pacienteInvalido');
-        console.log(msgErro);
+    var erros = validaPaciente(paciente);
+
+    if(erros.length > 0){
+        exibeMsgErro(erros);
         return;
-    }else{
-        msgErro = document.querySelector('.msgErro');
-        msgErro.textContent = "Paciente Cadastrado";
-        msgErro.classList.add('pacienteValido');
-        console.log(msgErro);
     }
     var tabela = document.querySelector("#tabela-pacientes");
 
     tabela.appendChild(pacienteTr);
 
     form.reset();
+    var msgErro = document.querySelector('.msgErro');
+    msgErro.innerHTML = ""; 
 })
 
  
@@ -70,9 +66,41 @@ function montarNovaTr(paciente){
 
 };
 function validaPaciente(paciente){
-    if(validaPeso(paciente.peso)){
-        return true;
-    }else{
-        return false;
+    
+    var erros = [];
+
+    if (paciente.nome.length == 0){
+        erros.push("Preencha o campo 'Nome' ");
     }
+    if (paciente.peso.length == 0){
+        erros.push("Preencha o campo 'Peso' ");
+    }
+    if(!validaPeso(paciente.peso)){
+        erros.push("Peso Inválido");
+    }
+    if (paciente.altura.length == 0){
+        erros.push("Preencha o campo 'Altura' ");
+    }
+    if(!validaAltura(paciente.altura)){
+        erros.push("Altura Inválida");        
+    }
+    if (paciente.gordura.length == 0){
+        erros.push("O campo 'Gordura' não pode ficar vazio ");
+    }
+
+    return erros;
 }
+function exibeMsgErro(erros){
+    
+        var msgErro = document.querySelector(".msgErro");
+        msgErro.innerHTML = "";//toda vez que a função for chamada, o innetHTML vai limpar tudo
+    //o valor que é posto dentro da função, no casso "erro", é utilizado apenas para referênciar o indice 
+        erros.forEach(function(erro){
+            var novaLi = document.createElement("li");
+            novaLi.textContent = erro;
+            novaLi.classList.add("msg");
+            novaLi.classList.add("pacienteInvalido");
+            msgErro.appendChild(novaLi);
+        });
+        
+        }        
