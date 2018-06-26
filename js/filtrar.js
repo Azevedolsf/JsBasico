@@ -1,15 +1,10 @@
-var campoFiltro = document.querySelector("#filtrarTabela");
-var copia = document.querySelector(".copia");
+var filtrarCampo = document.querySelector("#filtrarTabela");
 
-campoFiltro.addEventListener("input", function(){
-
-    console.log(this.value);
-
-    var pacientes = document.querySelectorAll('.paciente');
-    for(i=0; i <pacientes.length; i++){
-        var paciente = pacientes[i];
-        var tdNome = paciente.querySelector(".info-nome");
-        var nome = tdNome.textContent;
+filtrarCampo.addEventListener("input", function(){
+var pacientes = document.querySelectorAll(".paciente");
+    pacientes.forEach(function(paciente){
+        var nomeTd = paciente.querySelector(".info-nome");
+        var nome = nomeTd.textContent;
         console.log(nome);
-    }
+    })
 })
