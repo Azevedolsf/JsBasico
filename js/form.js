@@ -5,7 +5,6 @@ botaoAdicionar.addEventListener("click", function(event){
 
     var form = document.querySelector('#form-adiciona');
 
-
     var paciente = pegarValoresFormulario(form);
 
     var pacienteTr = montarNovaTr(paciente);    
