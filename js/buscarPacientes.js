@@ -8,8 +8,13 @@ buttonSearch.addEventListener("click", function() {
     xhr.open("GET", "https://api-pacientes.herokuapp.com/pacientes");
 
     xhr.addEventListener("load", function(){
-        console.log(xhr.responseText);
+        //console.log(xhr.responseText);
+        var pacientes = JSON.parse(xhr.responseText);
+        console.log(pacientes);
+        pacientes.forEach(function(paciente){
+            pegaPacientesDaTabela(paciente);
+        });
     });
 
-    xhr.send()
+    xhr.send();
 });

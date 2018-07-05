@@ -7,7 +7,7 @@ botaoAdicionar.addEventListener("click", function(event){
 
     var paciente = pegarValoresFormulario(form);
 
-    var pacienteTr = montarNovaTr(paciente);    
+    pegaPacientesDaTabela(paciente);    
     
     var erros = validaPaciente(paciente);
 
@@ -17,16 +17,17 @@ botaoAdicionar.addEventListener("click", function(event){
     }   
     var tabela = document.querySelector("#tabela-pacientes");
 
-    tabela.appendChild(pacienteTr);
-
     form.reset();
     var msgErro = document.querySelector('.msgErro');
     msgErro.innerHTML = ""; 
 })
 
+function pegaPacientesDaTabela(paciente){
+    var pacienteTr = montarNovaTr(paciente);    
+    tabela.appendChild(pacienteTr);
+}
  
 function pegarValoresFormulario(form){
-    
     var paciente =
     {
         nome: form.nome.value,
@@ -35,17 +36,13 @@ function pegarValoresFormulario(form){
         gordura: form.gordura.value,
         imc: calculaImc(form.peso.value, form.altura.value)
     }
-
     return paciente;
-
 };
 
 function montaTd(dado, classe){
-    
     var td = document.createElement("td");
     td.textContent = dado;
     td.classList.add(classe);
-
     return td;
 }
 
