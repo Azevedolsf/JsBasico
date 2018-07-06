@@ -176,3 +176,9 @@ button[disabled=disabled], button:disabled {
 	display: none;
 	
 }
+#erro-ajax{
+	color:red;
+	font-size:1em;
+	font-weight: bold;
+}
+
